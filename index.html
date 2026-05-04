@@ -230,6 +230,137 @@
     .partners b {
       font-size: 18px;
     }
+    
+    /* ===== Carousel (Case studies / News / etc.) ===== */
+    .carousel-wrap {
+      position: relative;
+    }
+    
+    .carousel-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .carousel-subtitle {
+      color: #666;
+      margin: 0;
+      font-size: 14px;
+    }
+    
+    /* viewport is constrained by .container already */
+    .carousel-viewport {
+      position: relative;
+      overflow: hidden;          /* hides extra cards */
+      padding: 6px 44px;         /* room for arrows */
+    }
+    
+    /* horizontal scroller */
+    .carousel-track {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      padding: 6px 2px 10px;
+    }
+    
+    /* hide scrollbar (keeps touch scroll) */
+    .carousel-track::-webkit-scrollbar { height: 0; }
+    .carousel-track { scrollbar-width: none; }
+    
+    /* card styling similar to partner columns */
+    .carousel-card {
+      flex: 0 0 280px;           /* fixed card width */
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+    
+    /* fixed image box like partner logos */
+    .carousel-thumb {
+      height: 110px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .carousel-thumb img {
+      max-height: 70px;
+      max-width: 85%;
+      object-fit: contain;
+      display: block;
+    }
+    
+    .carousel-body {
+      padding: 14px 14px 16px;
+    }
+    
+    .carousel-tag {
+      display: inline-block;
+      font-size: 12px;
+      color: #3f78bf;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    
+    .carousel-title {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+    
+    .carousel-text {
+      margin: 0 0 12px;
+      color: #444;
+      font-size: 13.5px;
+      line-height: 1.4;
+    }
+    
+    .carousel-link {
+      color: #000;               /* black link (consistent with your partner links) */
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .carousel-link:hover { text-decoration: underline; }
+    
+    /* arrows */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    .carousel-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    
+    .carousel-btn.left { left: 8px; }
+    .carousel-btn.right { right: 8px; }
+    
+    /* responsive: cards can be a bit narrower on small screens */
+    @media (max-width: 520px) {
+      .carousel-viewport { padding: 6px 40px; }
+      .carousel-card { flex-basis: 240px; }
+    }
 
   </style>
 </head>
@@ -470,6 +601,75 @@
 </div>
 
 
+<!-- CAROUSEL (Case studies / News / etc.) -->
+<div class="section container carousel-wrap">
+  <div class="carousel-header">
+    <h2 style="margin:0;">Insights</h2>
+    <p class="carousel-subtitle">Case studies, news and useful resources.</p>
+  </div>
+
+  <div class="carousel-viewport">
+    <button class="carousel-btn left" id="insightsPrev" aria-label="Previous items">‹</button>
+    <button class="carousel-btn right" id="insightsNext" aria-label="Next items">›</button>
+
+    <div class="carousel-track" id="insightsTrack">
+
+      <!-- Card 1 -->
+      <div class="carousel-card">
+        <div class="carousel-thumb">
+          <img src="images/CaseStudy-1.png" alt="Case study thumbnail">
+        </div>
+        <div class="carousel-body">
+          <div class="carousel-tag">Case Study</div>
+          <h3 class="carousel-title">Agency AI Adoption Snapshot</h3>
+          <p class="carousel-text">A quick summary of patterns and outcomes seen in public sector AI deployments.</p>
+          <a class="carousel-link" href="https://example.com" target="_blank" rel="noopener">Read more</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="carousel-card">
+        <div class="carousel-thumb">
+          <img src="images/News-1.png" alt="News thumbnail">
+        </div>
+        <div class="carousel-body">
+          <div class="carousel-tag">News</div>
+          <h3 class="carousel-title">Responsible AI & Governance Updates</h3>
+          <p class="carousel-text">Key governance considerations for secure, auditable and repeatable AI at scale.</p>
+          <a class="carousel-link" href="https://example.com" target="_blank" rel="noopener">View</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="carousel-card">
+        <div class="carousel-thumb">
+          <img src="images/Resource-1.png" alt="Resource thumbnail">
+        </div>
+        <div class="carousel-body">
+          <div class="carousel-tag">Resource</div>
+          <h3 class="carousel-title">AI in the Flow of Work</h3>
+          <p class="carousel-text">A practical guide to enabling productivity scenarios with M365 Copilot.</p>
+          <a class="carousel-link" href="https://example.com" target="_blank" rel="noopener">Open</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="carousel-card">
+        <div class="carousel-thumb">
+          <img src="images/CaseStudy-2.png" alt="Case study thumbnail">
+        </div>
+        <div class="carousel-body">
+          <div class="carousel-tag">Case Study</div>
+          <h3 class="carousel-title">Security-first AI Patterns</h3>
+          <p class="carousel-text">How agencies are approaching identity, data boundaries, and auditability.</p>
+          <a class="carousel-link" href="https://example.com" target="_blank" rel="noopener">Read more</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+  
 <!-- CTA -->
 <div class="section" style="text-align:center;">
   <div class="container">
@@ -490,4 +690,39 @@
 
   </div>
 </div>
+  
+<script>
+  (function () {
+    const track = document.getElementById('insightsTrack');
+    const prevBtn = document.getElementById('insightsPrev');
+    const nextBtn = document.getElementById('insightsNext');
 
+    function getStep() {
+      // Scroll roughly one "page" (viewport width minus arrows padding)
+      return Math.max(240, Math.floor(track.clientWidth * 0.85));
+    }
+
+    function updateButtons() {
+      // Small tolerance for fractional scroll positions
+      const maxScroll = track.scrollWidth - track.clientWidth - 2;
+      prevBtn.disabled = track.scrollLeft <= 2;
+      nextBtn.disabled = track.scrollLeft >= maxScroll;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -getStep(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: getStep(), behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', updateButtons);
+    window.addEventListener('resize', updateButtons);
+
+    // Init
+    updateButtons();
+  })();
+</script>
+
+</body>
